@@ -9,7 +9,7 @@ while True:
 #       gpsport.flush()
         raw = gpsport.readline()
 #       print(raw)
-        if raw != 0xff:
+        if raw != 0xff or 0xf0 or 0xac or 0xa7:
                 rxgps = raw.decode('utf-8')[:-1]
         else:
                 rxgps = ""
@@ -35,3 +35,4 @@ while True:
                 print("LON: " + Longitude)
 
 gpsport.close()
+
