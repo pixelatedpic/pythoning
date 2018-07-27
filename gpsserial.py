@@ -15,47 +15,44 @@ def dm(x):
     return conval
 #gpsport.flush()
 #sleep(5)
+
+
 while True:
 	try:
-	#	sleep(.5)
-	#	gpsport.flush()
-		raw = gpsport.readline()
-		# print(raw)
+		#reading the serial port , decode and remove the line terminations
+		raw = gpsport.readline().decode('utf-8')[:-1]
+		#print(raw)
+		data = raw.split(',')
+		#print(data[2])
+		if data[0]== "$GPRMC":
+			if data[2] !="V":
+#				print(raw)
+				UTCtime = data[1]
+				Latitude = data[3]
+				Longitude = data[5]
+				# print(Latitude)
+				# print(Longitude)
+				decLat = Decimal(Latitude)
+				decLon = Decimal(Longitude)
+				bapLat=dm(decLat)
+				bapLon=dm(decLon)
+				print("UTC: " + UTCtime)
+				print("LAT: " '{}'.format(bapLat))
+				print("LON: " '{}'.format(bapLon))
 
-		if raw != 0xff or 0xf0 or 0xac or 0xa7:
-			rxgps = raw.decode('utf-8')[:-1]
-		else:
-			rxgps = ""
-	#	rxgps = gpsport.readline().decode('utf-8')[:-1]
-		#rxgps = gpsport.readline()
-		#line = .decode('utf-8')[:-1]
-		data = rxgps.split(',')
-		#print(data[1])
-	#	print(rxgps)
-		if data[0] == "$GPGGA":
-			print(rxgps)
-	#		print(data[1])
-			UTCtime = data[1]
-			Latitude = data[2]
-			Longitude = data[4]
+		if data[0]== "$GPGGA":
 			SAT = data[7]
 			FIX = data[6]
-#			print(Latitude)
-			decLat = Decimal(Latitude)
-			decLon = Decimal(Longitude)
-#			f = str(Latitude)
-#			print(f)
-			bapLat=dm(decLat)
-			bapLon=dm(decLon)
-
-			print("UTC: " + UTCtime)
 			print("SAT: " + SAT)
 			print("FIX: " + FIX)
-			print("LAT: " '{}'.format(bapLat))
-			print("LON: " '{}'.format(bapLon))
-			
+
+		# print("UTC: " + UTCtime)
+		# print("SAT: " + SAT)
+		# print("FIX: " + FIX)
+		# print("LAT: " '{}'.format(bapLat))
+		# print("LON: " '{}'.format(bapLon))
+				
 	except KeyboardInterrupt:
 		print('Program stoped by the master')
 		gpsport.close()
 		break
-		#raise
