@@ -30,8 +30,10 @@ while True:
 				UTCtime = data[1]
 				Latitude = data[3]
 				Longitude = data[5]
-				# print(Latitude)
-				# print(Longitude)
+				SpeedKnots = data[7]
+				# Latitude = data[3]
+				# Longitude = data[5]
+				
 				decLat = Decimal(Latitude)
 				decLon = Decimal(Longitude)
 				bapLat=dm(decLat)
