@@ -10,7 +10,7 @@ while True:
     # print(raw)
     d = raw.split('\r\n')
     s= d[0]
-    t = s[:12]
+    t = s
     print(t)
 
     if '+CMTI: "SM",' in t:
@@ -18,6 +18,17 @@ while True:
         r = s.split(',')
         rxSMSnum = r[1]
         print("Message location :" + rxSMSnum)
+    
+    if '+CLIP:' in t:
+        print("Incoming Call")
+        r = s.split(',')
+        rxCALLnum = r[0]
+        # re.search('[1-9][0-9]*',a).group()
+
+        fd = re.search('[1-9][0-9]*',rxCALLnum).group()
+        # pat = re.compile(r'"*"')
+        # mat = pat.finditer(rxCALLnum)
+        print("Message location :" '{}'.format(fd))
         # print(r[2])
     # pattern = re.compile(r'+CMTI:')
     # matches = pattern.finditer(raw)
