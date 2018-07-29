@@ -1,0 +1,21 @@
+[{
+    "name":"samaritan",
+    "host": "192.168.1.9",
+    "port": 22,
+    "username": "root",
+    "password": "vidhuvaru",
+    "remotePath": "/home/samaritan/",
+    "localPath": "C:\/Users\/pix3latedpic\/Documents\/GitHub\/pythoning",
+    "disable": false,
+    "private_key": "~/.ssh/id_rsa"
+},{
+    "name":"",
+    "host": "",
+    "port": 22,
+    "username": "",
+    "password": "",
+    "remotePath": "",
+    "localPath": "",
+    "disable": false,
+    "private_key": "~/.ssh/id_rsa"
+}]
